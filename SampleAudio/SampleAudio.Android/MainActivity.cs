@@ -26,7 +26,7 @@ namespace SampleAudio.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            //CrossMediaManager.Current.Init(); //audio player package
+            CrossMediaManager.Current.Init(); //audio player package
             CachedImageRenderer.InitImageViewHandler();
             LoadApplication(new App());
         }

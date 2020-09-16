@@ -9,8 +9,6 @@ namespace SampleAudio
             InitializeComponent();
 
             var navigationPage = new Xamarin.Forms.NavigationPage(new MainPage());
-            navigationPage.On<iOS>().SetPrefersLargeTitles(true);
-
             MainPage = navigationPage;
         }
 

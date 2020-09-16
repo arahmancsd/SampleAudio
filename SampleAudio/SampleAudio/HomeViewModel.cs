@@ -1,5 +1,6 @@
 ﻿using MediaManager;
 using MediaManager.Library;
+using MediaManager.Media;
 using MediaManager.Player;
 using SampleAudio.Fonts;
 using System;
@@ -7,12 +8,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace SampleAudio
 {
@@ -38,8 +41,12 @@ namespace SampleAudio
         {
             Title = "listen";
             LoadContentsCommand = new Command(async () => await ExecuteLoadContents());
-            PlayChapterCommand = new Command(async () => await ExecutePlayChapterCommand());
+            PlayChapterCommand = new Command(() =>
+            Device.BeginInvokeOnMainThread(async () => {
+                await ExecutePlayChapterCommand();
+            }));
 
+            CrossMediaManager.Current.MediaPlayer.ShowPlaybackControls = true;
             LoadContentsCommand.Execute(null);
         }
         ObservableCollection<TopPage> _topPages;
@@ -73,21 +80,33 @@ namespace SampleAudio
         }
         async Task ExecutePlayChapterCommand()
         {
+            if (IsBusy) return; 
+            IsBusy = true;
             try
             {
-                if (CrossMediaManager.Current.State == MediaPlayerState.Paused)
-                    await CrossMediaManager.Current.PlayPause();
-                else if (CrossMediaManager.Current.State == MediaPlayerState.Playing)
-                    await CrossMediaManager.Current.Pause();
-                else
-                {
-                    ; 
-                }
+                await Task.Delay(TimeSpan.FromMilliseconds(10));
+                var reciter = Reciters.FirstOrDefault();
+                
+                    var mediaItem = await CrossMediaManager.Current.Play(reciter.DownloadURL);
+                    CrossMediaManager.Current.Queue.Current.IsMetadataExtracted = false;
+                    mediaItem.Title = reciter.Name;
+                    var image = new Image() { Source = ImageSource.FromUri(new Uri(reciter.ImagePath)) };
+                    CrossMediaManager.Current.Queue.Current.Title = string.Format("{0} - {1} ({2})", "1", "ChName", "English");
+                    CrossMediaManager.Current.Queue.Current.Album = reciter.Name;
+                    CrossMediaManager.Current.Queue.Current.Artist = reciter.Name;
+                    CrossMediaManager.Current.Queue.Current.AlbumImage = image;
+                    CrossMediaManager.Current.Queue.Current.AlbumImageUri = reciter.ImagePath;
+                    CrossMediaManager.Current.Queue.Current.DisplayImage = image;
+                    CrossMediaManager.Current.Queue.Current.DisplayImageUri = reciter.ImagePath;
+                    CrossMediaManager.Current.Queue.Current.Image = image;
+                    CrossMediaManager.Current.Queue.Current.ImageUri = reciter.ImagePath;
+                    CrossMediaManager.Current.Notification.UpdateNotification();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
+            finally { IsBusy = false; }
         }
     }
 }

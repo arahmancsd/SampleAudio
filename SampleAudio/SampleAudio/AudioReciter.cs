@@ -20,13 +20,13 @@ namespace SampleAudio
 
         readonly static List<AudioReciter> listOfReciters = new List<AudioReciter>
             {
-                new AudioReciter() { ReciterID = 1, Name = "ABC", ImagePath = "http://www.azee.tech/r9.png",
+                new AudioReciter() { ReciterID = 1, Name = "ABC", ImagePath = "https://www.azee.tech/wolf.jpg",
                     DownloadURL = "https://www.azee.tech/MaherAlMuaiqly64kbps/001.mp3", ReciterType = ReciterType.ListenOnly },
-                new AudioReciter() { ReciterID = 1, Name = "BDC", ImagePath = "https://www.azee.tech/r2.png",
+                new AudioReciter() { ReciterID = 1, Name = "BDC", ImagePath = "https://www.azee.tech/r9.jpg",
                     DownloadURL = "https://www.azee.tech/MaherAlMuaiqly64kbps/114.mp3", ReciterType =  ReciterType.ListenOnly },
-                new AudioReciter() { ReciterID = 1, Name = "AEC", ImagePath = "https://www.azee.tech/r3.png",
+                new AudioReciter() { ReciterID = 1, Name = "AEC", ImagePath = "https://www.azee.tech/r9.png",
                     DownloadURL = "https://www.azee.tech/MaherAlMuaiqly64kbps/113.mp3", ReciterType =  ReciterType.ListenOnly },
-                new AudioReciter() { ReciterID = 1, Name = "Name", ImagePath = "https://www.azee.tech/r4.png",
+                new AudioReciter() { ReciterID = 1, Name = "Name", ImagePath = "https://www.azee.tech/r1.png",
                     DownloadURL = "https://www.azee.tech/MaherAlMuaiqly64kbps/112.mp3", ReciterType =  ReciterType.ListenOnly },
                 new AudioReciter() { ReciterID = 1, Name = "XYZ", ImagePath = "https://www.azee.tech/r5.png",
                     DownloadURL = "https://www.azee.tech/MaherAlMuaiqly64kbps/113.mp3", ReciterType =  ReciterType.ListenOnly },
