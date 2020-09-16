@@ -20,7 +20,7 @@ namespace SampleAudio
 
         readonly static List<AudioReciter> listOfReciters = new List<AudioReciter>
             {
-                new AudioReciter() { ReciterID = 1, Name = "ABC", ImagePath = "https://www.azee.tech/wolf.jpg",
+                new AudioReciter() { ReciterID = 1, Name = "ABC", ImagePath = "https://www.azee.tech/uz.png",
                     DownloadURL = "https://www.azee.tech/MaherAlMuaiqly64kbps/001.mp3", ReciterType = ReciterType.ListenOnly },
                 new AudioReciter() { ReciterID = 1, Name = "BDC", ImagePath = "https://www.azee.tech/r9.jpg",
                     DownloadURL = "https://www.azee.tech/MaherAlMuaiqly64kbps/114.mp3", ReciterType =  ReciterType.ListenOnly },
