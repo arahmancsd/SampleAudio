@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:FFImageCache="clr-namespace:FFImageLoading.Cache;assembly=FFImageLoading"
+             x:Class="SampleAudio.App">
+    <Application.Resources>
+        <Style x:Key="HorizentalLine" TargetType="BoxView">
+            <Setter Property="HeightRequest" Value="1"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+            <Setter Property="Color" Value="LightGray"/>
+        </Style>
+        <OnPlatform x:Key="CacheType" x:TypeArguments="FFImageCache:CacheType" iOS="All" Android="Memory"/>
+        <Style x:Key="FFImageDefaultStyleWithoutBinding" TargetType="FFImage:CachedImage">
+            <Setter Property="IsOpaque" Value="True" />
+            <Setter Property="InputTransparent" Value="False" />
+            <Setter Property="CacheType" Value="{StaticResource CacheType}" />
+            <Setter Property="DownsampleToViewSize" Value="True"></Setter>
+            <Setter Property="CacheDuration" Value="10"/>
+            <Setter Property="BitmapOptimizations" Value="False"></Setter>
+            <Setter Property="RetryCount" Value="10"></Setter>
+        </Style>
+        <Style x:Key="DefaultFrame" TargetType="Frame">
+            <Setter Property="IsClippedToBounds" Value="False"></Setter>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="BorderColor" Value="LightGray"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="HasShadow" Value="False"/>
+        </Style>
+    </Application.Resources>
+</Application>

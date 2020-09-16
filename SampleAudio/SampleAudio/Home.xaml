@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:viewModel="clr-namespace:SampleAudio"
+             xmlns:FFimageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:fontawesome="clr-namespace:SampleAudio.Fonts"
+             x:Class="SampleAudio.Home">
+    <ContentPage.BindingContext>
+        <viewModel:HomeViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <DataTemplate x:Key="PageListItemTemplate">
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                    <Label HorizontalOptions="Start" VerticalOptions="Center" TextColor="Black" Text="{Binding Title}"/>
+                </StackLayout>
+                <BoxView Style="{StaticResource HorizentalLine}"></BoxView>
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="ItemTemplate">
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center" Padding="0,5,0,0">
+                <FFImage:CachedImage HeightRequest="100" WidthRequest="100" Source="{Binding ImagePath}" Style="{StaticResource FFImageDefaultStyleWithoutBinding}">
+                    <FFImage:CachedImage.Transformations>
+                        <FFimageTransformation:CircleTransformation></FFimageTransformation:CircleTransformation>
+                    </FFImage:CachedImage.Transformations>
+                </FFImage:CachedImage>
+                <Label Text="{Binding Name}" FontSize="Small" WidthRequest="150" HorizontalTextAlignment="Center" LineBreakMode="WordWrap" />
+            </StackLayout>
+        </DataTemplate>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <FlexLayout Direction="Column">
+            <FlexLayout FlexLayout.Grow="1">
+                <ScrollView>
+                    <Grid Padding="5" BackgroundColor="Red">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackLayout Orientation="Vertical" Grid.Row="0">
+                            <StackLayout x:Name="listView" Padding="0,10,0,10"
+                             BindableLayout.ItemsSource="{Binding TopPages}"
+                             BindableLayout.ItemTemplate="{StaticResource PageListItemTemplate}">
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical" Grid.Row="1" HeightRequest="350">
+                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                <Label Text="Reciters" HorizontalOptions="StartAndExpand"/>
+                                <Label Text="Show All" FontSize="Medium" HorizontalOptions="End">
+                                </Label>
+                            </StackLayout>
+                            <Frame Style="{StaticResource DefaultFrame}" Padding="5">
+                                <CollectionView x:Name="reciterItemView" ItemsSource="{Binding Reciters}" BackgroundColor="Blue"
+                                SelectionMode="Single" ItemTemplate="{StaticResource ItemTemplate}">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal" VerticalItemSpacing="5" 
+                                                 HorizontalItemSpacing="5" Span="2" />
+                                    </CollectionView.ItemsLayout>
+                                </CollectionView>
+                            </Frame>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical" Grid.Row="2" HeightRequest="350">
+                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                <Label Text="Translations" HorizontalOptions="StartAndExpand"/>
+                                <Label Text="Show All" FontSize="Medium" HorizontalOptions="End"/>
+                            </StackLayout>
+                            <Frame Style="{StaticResource DefaultFrame}">
+                                <CollectionView x:Name="translationItemView" ItemsSource="{Binding Reciters}" BackgroundColor="Blue"
+                                SelectionMode="Single" ItemTemplate="{StaticResource ItemTemplate}" >
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"  Span="2" />
+                                    </CollectionView.ItemsLayout>
+                                </CollectionView>
+                            </Frame>
+                        </StackLayout>
+                    </Grid>
+                </ScrollView>
+            </FlexLayout>
+            <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" HeightRequest="60" BackgroundColor="Green">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+                    <ImageButton BackgroundColor="Transparent" Command="{Binding PlayChapterCommand}" VerticalOptions="Center">
+                        <ImageButton.Source>
+                            <FontImageSource Glyph="{x:Static fontawesome:FontAwesomeIcons.Play}" FontFamily="Fas"/>
+                        </ImageButton.Source>
+                    </ImageButton>
+                </StackLayout>
+            </StackLayout>
+        </FlexLayout>
+    </ContentPage.Content>
+</ContentPage>
